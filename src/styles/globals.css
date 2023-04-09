@@ -8,6 +8,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --mesh-bg: url('/static/mesh-gradient.png');
 
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -38,39 +39,37 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  /* JS Grayscale Colorset */
+  --black-color-color: #2c3e50;
+  --blue-black-color: #34495e;
+  --dark-grey-color: #7f8c8d;
+  --md-grey-color: #95a5a6;
+  --light-grey-color: #bdc3c7;
+  --off-white-color: #ecf0f1;
+  --white-color: #ffffff;
 
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
+  /* JS Rainbow Colorset */
+  --dark-red-color: #c0392b;
+  --red-color: #e74c3c;
+  --dark-orange-color: #e67e22;
+  --orange-color: #f39c12;
+  --dark-yellow-color: #f1c40f;
+  --yellow-color: #fff200;
+  --dark-teal-color: #006266;
+  --teal-color: #079992;
+  --dark-green-color: #009432;
+  --green-color: #20bf6b;
+  --dark-purple-color: #40407a;
+  --purple-color: #706fd3;
+  --dark-blue-color: #1e3799;
+  --blue-color: #0652dd;
 
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
+  /* Mesh colorset */
+  /* white #FFFFFF */
+  --sage-green-color: #b9dfc7;
+  --sand-beige-color: #fbf6e9;
+  --grey-blue-color: #afc8de;
 }
 
 * {
@@ -86,13 +85,11 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--black-color);
+  background: var(--mesh-bg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
 }
 
 a {
