@@ -15,11 +15,13 @@ import styles from "./Banner.module.css"
       <p className={`${styles.subtitle} ${utilStyles.headingLg}`}>
         { props.subtitle }
       </p>
-      <button 
-        className={styles.btn}
-        onClick={props.handleOnClick}>
-        { props.btnText }
-      </button>
+      <div className={styles.btnWrapper}>
+        <button 
+          className={styles.btn}
+          onClick={props.handleOnClick}>
+          { props.btnText }
+        </button>
+      </div>
     </section>
   )
 }
