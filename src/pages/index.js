@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
 import Layout, { baseAppTitle } from '@/components/global/Layout'
+import Banner from '@/components/global/Banner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,6 +15,7 @@ export default function Home() {
         <title>{ baseAppTitle } - Home</title>
       </Head>
       <main className={styles.main}>
+        <Banner/>
         <div className={styles.description}>
           <h1 className={styles.title}>
             { baseAppTitle }
