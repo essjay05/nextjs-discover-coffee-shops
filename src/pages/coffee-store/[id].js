@@ -1,4 +1,5 @@
 import { useRouter } from "next/router"
+import Link from "next/link"
 
 const CoffeeStore = () => {
   const router = useRouter()
@@ -12,6 +13,13 @@ const CoffeeStore = () => {
   return (
     <>
       <h1>{ title } ID#: { id }</h1>
+      <Link href="/" name="Back to home page">
+        Back to Home page
+      </Link>
+      <br/>
+      <Link href="/coffee-store/dynamic" name="Back to Dynamic page">
+        Back to Dynamic page
+      </Link>
     </>
   )
 }
