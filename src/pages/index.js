@@ -9,17 +9,18 @@ import Banner from '@/components/global/Banner'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  const title = baseAppTitle
+  const subtitle = 'Discover your local coffee shops!'
+
   return (
     <>
       <Head>
         <title>{ baseAppTitle } - Home</title>
       </Head>
       <main className={styles.main}>
-        <Banner/>
+        <Banner title={title} subtitle={subtitle}/>
         <div className={styles.description}>
-          <h1 className={styles.title}>
-            { baseAppTitle }
-          </h1>
         </div>
       </main>
     </>
