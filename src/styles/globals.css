@@ -42,7 +42,7 @@
   --card-border-rgb: 131, 134, 135;
 
   /* JS Grayscale Colorset */
-  --black-color-color: #2c3e50;
+  --black-color: #2c3e50;
   --blue-black-color: #34495e;
   --dark-grey-color: #7f8c8d;
   --md-grey-color: #95a5a6;
@@ -78,6 +78,19 @@
   --default-transition: 0.3s ease-in-out;
   --default-box-shadow: 5px 6px 5px -1px rgba(194, 186, 194, 1);
   --text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+
+  /* Site Color Palette */
+  --text-black: var(--black-color);
+  --text-white: var(--white-color);
+  --text-blue: var(--dark-blue-color);
+  --text-green: var(--dark-green-color);
+
+  /* Breakpoints: */
+  /* sm: min-width: 640px;
+  md: min-width: 768px;
+  lg: min-width: 1024px;
+  xl: min-width: 1280px;
+  2xl min-width: 1536px; */
 }
 
 * {

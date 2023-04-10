@@ -1,12 +1,32 @@
 .container {
   width: 100%;
   padding: 1rem 2.5%;
+  margin-bottom: 6rem;
 }
 
-.titleA {
+.title {
+  letter-spacing: -0.025rem;
+  font-weight: 800;
+  color: var(--text-black);
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.spanA {
   color: var(--teal-color);
 }
 
-.titleB {
+.spanB {
   color: var(--dark-blue-color);
+}
+
+.subtitle {
+  margin-top: 0.75rem;
+  font-size: 1.75rem;
+  line-height: 2rem;
+  color: var(--text-black);
+}
+
+.btnWrapper {
+  margin-top: 1.25rem;
 }

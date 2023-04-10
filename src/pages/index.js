@@ -13,6 +13,10 @@ export default function Home() {
   const titleA = 'Coffee '
   const titleB = 'Connoisseur'
   const subtitle = 'Discover your local coffee shops!'
+  const btnText = 'Find Local Shops!'
+  const handleOnBannerBtnClick = () => {
+    console.log('Hi Banner Button :)')
+  }
 
   return (
     <>
@@ -20,7 +24,12 @@ export default function Home() {
         <title>{ baseAppTitle } - Home</title>
       </Head>
       <main className={styles.main}>
-        <Banner titleA={titleA} titleB={titleB} subtitle={subtitle}/>
+        <Banner
+          titleA={titleA} 
+          titleB={titleB} 
+          subtitle={subtitle}
+          btnText={btnText}
+          handleOnClick={handleOnBannerBtnClick}/>
         <div className={styles.description}>
         </div>
       </main>
