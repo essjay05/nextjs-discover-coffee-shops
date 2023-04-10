@@ -2,3 +2,11 @@
   width: 100%;
   padding: 1rem 2.5%;
 }
+
+.titleA {
+  color: var(--teal-color);
+}
+
+.titleB {
+  color: var(--dark-blue-color);
+}

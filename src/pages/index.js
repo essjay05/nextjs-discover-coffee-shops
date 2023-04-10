@@ -10,7 +10,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const title = baseAppTitle
+  const titleA = 'Coffee '
+  const titleB = 'Connoisseur'
   const subtitle = 'Discover your local coffee shops!'
 
   return (
@@ -19,7 +20,7 @@ export default function Home() {
         <title>{ baseAppTitle } - Home</title>
       </Head>
       <main className={styles.main}>
-        <Banner title={title} subtitle={subtitle}/>
+        <Banner titleA={titleA} titleB={titleB} subtitle={subtitle}/>
         <div className={styles.description}>
         </div>
       </main>
