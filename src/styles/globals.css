@@ -83,6 +83,7 @@
   --text-black: var(--black-color);
   --text-white: var(--white-color);
   --text-blue: var(--dark-blue-color);
+  --link-blue: var(--blue-color);
   --text-green: var(--dark-green-color);
 
   /* Breakpoints: */
@@ -125,8 +126,14 @@ main,
 }
 
 a {
-  color: inherit;
+  color: var(--link-blue);
   text-decoration: none;
+}
+
+a,
+button {
+  cursor: pointer;
+  transition: var(--default-transition);
 }
 
 button,
@@ -144,12 +151,6 @@ button,
 
 a:hover {
   text-decoration: underline;
-}
-
-a,
-button {
-  cursor: pointer;
-  transition: var(--default-transition);
 }
 
 button:hover,
