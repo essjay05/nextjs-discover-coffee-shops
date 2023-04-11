@@ -59,7 +59,7 @@ export default function Home( props ) {
           <section className={styles.listContainer}>
             <h2 className={styles.listHeader}>Toronto Stores</h2>
             <div className={styles.cardLayout}>
-              { props.coffeeStores.map((cafe) => {
+              { props.coffeeStores.map(cafe => {
                 return (
                   <Card
                     key={cafe.id}
