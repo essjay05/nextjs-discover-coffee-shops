@@ -113,10 +113,12 @@ body {
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: cover;
+  width: 100%;
 }
 
 main,
-.main {
+.main,
+.aboveFold {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
 
   const titleA = 'Coffee '
-  const titleB = 'Connoisseur'
+  const titleB = 'Connection'
   const subtitle = 'Discover your local coffee shops!'
   const btnText = 'Find Local Shops!'
   const handleOnBannerBtnClick = () => {
@@ -23,16 +23,25 @@ export default function Home() {
       <Head>
         <title>{ baseAppTitle } - Home</title>
       </Head>
-      <main className={styles.main}>
-        <Banner
-          titleA={titleA} 
-          titleB={titleB} 
-          subtitle={subtitle}
-          btnText={btnText}
-          handleOnClick={handleOnBannerBtnClick}/>
-        <div className={styles.description}>
-        </div>
-      </main>
+      <Layout>
+        <section className={styles.aboveFold}>
+          <Banner
+            titleA={titleA} 
+            titleB={titleB} 
+            subtitle={subtitle}
+            btnText={btnText}
+            handleOnClick={handleOnBannerBtnClick}/>
+          <div
+            className={styles.heroImage} >
+            <Image 
+              priority
+              src="/static/undraw_coffee_with_friends_3cbj .svg"
+              width={700}
+              height={400}
+              alt="Illustration of 3 friends having coffee together."/>
+          </div>
+        </section>
+      </Layout>
     </>
   )
 }
