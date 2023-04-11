@@ -7,6 +7,8 @@ import Layout, { baseAppTitle } from '@/components/global/Layout'
 import Banner from '@/components/global/Banner'
 import Card from '@/components/global/Card'
 
+import coffeeStores from '../data/coffee-stores.json'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -42,12 +44,18 @@ export default function Home() {
               alt="Illustration of 3 friends having coffee together."/>
           </div>
         </section>
-        <section className={styles.listSection}>
-          <Card
-            name={"DarkHorse Coffee"}
-            href={`/coffee-store/darkhorse-coffee`}
-            imgSrc="/static/undraw_hot_beverage_re_9mpe.svg"
-            />
+        <section className={styles.cardLayout}>
+          { coffeeStores.map((cafe) => {
+            return (
+              <Card
+                key={cafe.id}
+                className={styles.card}
+                name={cafe.name}
+                href={`/coffee-store/${cafe.id}`}
+                imgSrc={cafe.imgUrl}
+                />
+            )
+          })}
         </section>
       </Layout>
     </>
