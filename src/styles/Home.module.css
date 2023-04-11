@@ -147,10 +147,6 @@
     right: -27%;
   }
 
-  .content {
-    padding: 4rem;
-  }
-
   .grid,
   .cardLayout {
     display: grid;
@@ -167,15 +163,12 @@
   .aboveFold {
     flex-direction: column;
     flex-wrap: wrap;
+    margin-bottom: 1.5rem;
   }
 
   .heroImage {
     top: 5%;
     right: 0;
-  }
-
-  .content {
-    padding: 4rem;
   }
 
   .grid,

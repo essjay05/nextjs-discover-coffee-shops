@@ -11,7 +11,18 @@ import coffeeStores from '../data/coffee-stores.json'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export async function getStaticProps(context) {
+  return {
+    props: {
+      coffeeStores,
+    }
+  }
+}
+
+export default function Home( props ) {
+
+  console.log('Home props')
+  console.log(props)
 
   const titleA = 'Coffee '
   const titleB = 'Connection'
@@ -44,19 +55,27 @@ export default function Home() {
               alt="Illustration of 3 friends having coffee together."/>
           </div>
         </section>
-        <section className={styles.cardLayout}>
-          { coffeeStores.map((cafe) => {
-            return (
-              <Card
-                key={cafe.id}
-                className={styles.card}
-                name={cafe.name}
-                href={`/coffee-store/${cafe.id}`}
-                imgSrc={cafe.imgUrl}
-                />
-            )
-          })}
+        { props.coffeeStores.length > 0 ?
+          <section className={styles.listContainer}>
+            <h2 className={styles.listHeader}>Toronto Stores</h2>
+            <div className={styles.cardLayout}>
+              { props.coffeeStores.map((cafe) => {
+                return (
+                  <Card
+                    key={cafe.id}
+                    className={styles.card}
+                    name={cafe.name}
+                    href={`/coffee-store/${cafe.id}`}
+                    imgSrc={cafe.imgUrl}
+                    />
+                )
+              })}
+            </div>
         </section>
+        :
+        <></>
+        }
+        
       </Layout>
     </>
   )
