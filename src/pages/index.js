@@ -7,14 +7,14 @@ import Layout, { baseAppTitle } from '@/components/global/Layout'
 import Banner from '@/components/global/Banner'
 import Card from '@/components/global/Card'
 
-import coffeeStores from '../data/coffee-stores.json'
+import coffeeStoresData from '../data/coffee-stores.json'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export async function getStaticProps(context) {
   return {
     props: {
-      coffeeStores,
+      coffeeStores: coffeeStoresData,
     }
   }
 }

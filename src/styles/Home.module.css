@@ -33,9 +33,11 @@
   justify-content: center;
 }
 
-.card span {
-  display: inline-block;
-  transition: transform 200ms;
+.listHeader {
+  font-size: 2.25rem;
+  line-height: 2.25rem;
+  padding: 1rem 0;
+  color: var(--text-teal);
 }
 
 .center {

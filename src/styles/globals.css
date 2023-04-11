@@ -86,6 +86,7 @@
   --text-blue: var(--dark-blue-color);
   --link-blue: var(--blue-color);
   --text-green: var(--dark-green-color);
+  --text-teal: var(--teal-color);
 
   /* Breakpoints: */
   /* sm: min-width: 640px;
