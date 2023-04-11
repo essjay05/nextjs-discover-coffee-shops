@@ -1,0 +1,57 @@
+.cardLink {
+  margin: auto;
+  --tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 0 transparent, 0 0 #0000, 0 0 transparent, 0 0 #0000,
+    0 0 transparent;
+  border-color: var(--white-color);
+  border-radius: var(--border-radius);
+}
+
+.cardLink:hover .cardHeader {
+  text-decoration: none;
+}
+
+.cardContainer {
+  border-radius: var(--border-radius);
+  padding: 0.25rem 1rem 1.25rem;
+  backdrop-filter: blur(10px);
+}
+
+.cardTextWrapper {
+  margin: 0.75rem auto;
+  width: 100%;
+}
+
+.cardHeader {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  overflow: hidden;
+  width: 16rem;
+  text-align: center;
+  margin: 0 auto;
+  color: var(--text-blue);
+}
+
+.cardImgWrapper {
+  color: var(--text-black);
+}
+
+.cardImg {
+  border-radius: var(--border-radius);
+}
+
+@media (min-width: 1024px) {
+  .cardHeader {
+    width: 14rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardHeader {
+    width: 12rem;
+  }
+}
