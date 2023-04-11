@@ -5,6 +5,7 @@ import styles from '@/styles/Home.module.css'
 
 import Layout, { baseAppTitle } from '@/components/global/Layout'
 import Banner from '@/components/global/Banner'
+import Card from '@/components/global/Card'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -40,6 +41,13 @@ export default function Home() {
               height={400}
               alt="Illustration of 3 friends having coffee together."/>
           </div>
+        </section>
+        <section className={styles.listSection}>
+          <Card
+            name={"DarkHorse Coffee"}
+            href={`/coffee-store/darkhorse-coffee`}
+            imgSrc="/static/undraw_hot_beverage_re_9mpe.svg"
+            />
         </section>
       </Layout>
     </>
