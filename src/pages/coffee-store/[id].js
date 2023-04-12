@@ -25,7 +25,7 @@ export function getStaticPaths() {
       { params: { id: '1' } },
       { params: { id: '2' } }
     ],
-    fallback: false
+    fallback: true
   }
 }
 
@@ -33,36 +33,60 @@ const CoffeeStore = (props) => {
   const router = useRouter()
   const { id } = router.query
 
- 
+  if (router.isFallback){
+    return <div>Loading...</div>
+  }
 
-  const { name, imgUrl, address } = {...props.coffeeStore}
-
-  console.log('Coffee store, props:')
-  console.log(name)
+  const { name, imgUrl, address, neighbourhood } = {...props.coffeeStore}
 
   const title = 'Coffee Store Page'
 
+  const handleUpVoteBtn = () => {
+    console.log('Clicked up vote!')
+  }
+
   return (
     <>
-      <h1 className={styles.storeTitle}>
-        { title }: {name}
-      </h1>
-      <Image
-        className={styles.storeImg}
-        src={imgUrl}
-        alt={`Image of ${name} store`}
-        width={600}
-        height={400}/>
-      <p className={styles.storeAddress}>
-        {address}
-      </p>
-      <Link href="/" name="Back to home page">
-        Back to Home page
-      </Link>
-      <br/>
-      <Link href="/coffee-store/dynamic" name="Back to Dynamic page">
-        Back to Dynamic page
-      </Link>
+      <section className={styles.storeContainer}>
+        <div className={styles.col1}>
+          <h1 className={styles.storeTitle}>
+            { title }: {name}
+          </h1>
+          <Image
+            priority
+            className={styles.storeImg}
+            src={imgUrl}
+            alt={`Image of ${name} store`}
+            width={600}
+            height={400}/>
+        </div>
+        <div className={`glass ${styles.col2}`}>
+          <div className={styles.iconWrapper}>
+            <Image src="" width="24" height="24" alt="Location pin icon"/>
+            <p className={styles.text}>
+              {address}
+            </p>
+          </div>
+          <div className={styles.iconWrapper}>
+            <Image src="" width="24" height="24" alt="Star icon"/>  
+            <p className={styles.text}>
+              {neighbourhood}
+            </p>
+          </div>
+          <div className={styles.iconWrapper}>
+            <Image src="" width="24" height="24" alt="Star icon"/>  
+            <p className={styles.text}>
+              Rating: 1
+            </p>
+          </div>
+          <button className={styles.upvoteBtn} onClick={handleUpVoteBtn}>Up Vote!</button>
+        </div>
+      </section>
+      <section className={styles.linksWrapper}>
+        <Link href="/" name="Back to home page">
+          Back to Home page
+        </Link>
+      </section>
     </>
   )
 }
