@@ -12,17 +12,30 @@ import coffeeStoresData from '../data/coffee-stores.json'
 const inter = Inter({ subsets: ['latin'] })
 
 export async function getStaticProps(context) {
+  const sanJoseLatLongCoords = '37.338207%2C-121.886330'
+
+  const options = {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: process.env.DATA_KEY
+    }
+  }
+
+  const response = await fetch(`https://api.foursquare.com/v3/places/search?ll=${sanJoseLatLongCoords}&categories=13032&limit=9`, options)
+  const data = await response.json()
+
   return {
     props: {
-      coffeeStores: coffeeStoresData,
+      coffeeStores: data.results,
     }
   }
 }
 
 export default function Home( props ) {
 
-  console.log('Home props')
-  console.log(props)
+  // console.log('Home props')
+  // console.log(props)
 
   const titleA = 'Coffee '
   const titleB = 'Connection'
@@ -31,6 +44,8 @@ export default function Home( props ) {
   const handleOnBannerBtnClick = () => {
     console.log('Hi Banner Button :)')
   }
+
+  const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
 
   return (
     <>
@@ -62,11 +77,11 @@ export default function Home( props ) {
               { props.coffeeStores.map(cafe => {
                 return (
                   <Card
-                    key={cafe.id}
+                    key={cafe.fsq_id}
                     className={styles.card}
                     name={cafe.name}
-                    href={`/coffee-store/${cafe.id}`}
-                    imgSrc={cafe.imgUrl}
+                    href={`/coffee-store/${cafe.fsq_id}`}
+                    imgSrc={cafe.imgUrl || defaultImgUrl}
                     />
                 )
               })}
