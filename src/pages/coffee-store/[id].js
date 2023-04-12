@@ -41,52 +41,59 @@ const CoffeeStore = (props) => {
 
   const title = 'Coffee Store Page'
 
+  const iconBaseString = '/static/icons/'
+
   const handleUpVoteBtn = () => {
     console.log('Clicked up vote!')
   }
 
   return (
     <>
-      <section className={styles.storeContainer}>
-        <div className={styles.col1}>
-          <h1 className={styles.storeTitle}>
-            { title }: {name}
-          </h1>
-          <Image
-            priority
-            className={styles.storeImg}
-            src={imgUrl}
-            alt={`Image of ${name} store`}
-            width={600}
-            height={400}/>
-        </div>
-        <div className={`glass ${styles.col2}`}>
-          <div className={styles.iconWrapper}>
-            <Image src="" width="24" height="24" alt="Location pin icon"/>
-            <p className={styles.text}>
-              {address}
-            </p>
+      <section className={styles.layout}>
+        <div className={styles.container}>
+          <div className={styles.col1}>
+            <div className={styles.backToHomeLink}>
+              <Link href="/" name="Back to home page">
+                Back to Home page
+              </Link>
+            </div>
+            <div className={styles.nameWrapper}>
+              <h1 className={styles.storeTitle}>
+                { title }: {name}
+              </h1>
+            </div>
+            <Image
+              priority
+              className={styles.storeImg}
+              src={imgUrl}
+              alt={`Image of ${name} store`}
+              width={600}
+              height={400}/>
           </div>
-          <div className={styles.iconWrapper}>
-            <Image src="" width="24" height="24" alt="Star icon"/>  
-            <p className={styles.text}>
-              {neighbourhood}
-            </p>
+          <div className={`glass ${styles.col2}`}>
+            <div className={styles.iconWrapper}>
+              <Image src={`${iconBaseString}location-pin.svg`} width="24" height="24" alt="Location pin icon"/>
+              <p className={styles.text}>
+                {address}
+              </p>
+            </div>
+            <div className={styles.iconWrapper}>
+              <Image src={`${iconBaseString}near-me.svg`} width="24" height="24" alt="Star icon"/>  
+              <p className={styles.text}>
+                {neighbourhood}
+              </p>
+            </div>
+            <div className={styles.iconWrapper}>
+              <Image src={`${iconBaseString}star.svg`} width="24" height="24" alt="Star icon"/>  
+              <p className={styles.text}>
+                Rating: 1
+              </p>
+            </div>
+            <button className={styles.upvoteBtn} onClick={handleUpVoteBtn}>Up Vote!</button>
           </div>
-          <div className={styles.iconWrapper}>
-            <Image src="" width="24" height="24" alt="Star icon"/>  
-            <p className={styles.text}>
-              Rating: 1
-            </p>
-          </div>
-          <button className={styles.upvoteBtn} onClick={handleUpVoteBtn}>Up Vote!</button>
         </div>
       </section>
-      <section className={styles.linksWrapper}>
-        <Link href="/" name="Back to home page">
-          Back to Home page
-        </Link>
-      </section>
+      
     </>
   )
 }
