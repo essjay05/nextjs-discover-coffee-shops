@@ -8,26 +8,17 @@ import Banner from '@/components/global/Banner'
 import Card from '@/components/global/Card'
 
 import coffeeStoresData from '../data/coffee-stores.json'
+import { fetchCoffeeStores } from '@/lib/coffee-stores'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export async function getStaticProps(context) {
-  const sanJoseLatLongCoords = '37.338207%2C-121.886330'
-
-  const options = {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: process.env.DATA_KEY
-    }
-  }
-
-  const response = await fetch(`https://api.foursquare.com/v3/places/search?ll=${sanJoseLatLongCoords}&categories=13032&limit=9`, options)
-  const data = await response.json()
+  
+  const libCoffeeStores = await fetchCoffeeStores()
 
   return {
     props: {
-      coffeeStores: data.results,
+      coffeeStores: libCoffeeStores,
     }
   }
 }
@@ -72,7 +63,7 @@ export default function Home( props ) {
         </section>
         { props.coffeeStores.length > 0 ?
           <section className={styles.listContainer}>
-            <h2 className={styles.listHeader}>Toronto Stores</h2>
+            <h2 className={styles.listHeader}>San Jose Stores</h2>
             <div className={styles.cardLayout}>
               { props.coffeeStores.map(cafe => {
                 return (
