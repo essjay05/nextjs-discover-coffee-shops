@@ -4,27 +4,33 @@ import Image from "next/image"
 
 import styles from './CoffeeStore.module.css'
 import coffeeStoreData from '../../data/coffee-stores.json'
+import { fetchCoffeeStores } from "@/lib/coffee-stores"
 
-export function getStaticProps(staticProps) {
+export async function getStaticProps(staticProps) {
   const params = staticProps.params
   console.log('getStaticProps params:')
   console.log(params)
+  const libCoffeeStores = await fetchCoffeeStores()
   return {
     props: {
-      coffeeStore: coffeeStoreData.find(coffeeStore => {
-        return coffeeStore.id.toString() === params.id
+      coffeeStore: libCoffeeStores.find((coffeeStore) => {
+        return coffeeStore.fsq_id.toString() === params.id
       })
     }
   }
 }
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const coffeeStores = await fetchCoffeeStores()
+  const paths = coffeeStores.map((coffeeStore) => {
+    return { 
+      params: { 
+        id: coffeeStore.fsq_id.toString()
+      }
+    }
+  })
   return {
-    paths: [
-      { params: { id: '0' } },
-      { params: { id: '1' } },
-      { params: { id: '2' } }
-    ],
+    paths,
     fallback: true
   }
 }
@@ -37,11 +43,13 @@ const CoffeeStore = (props) => {
     return <div>Loading...</div>
   }
 
-  const { name, imgUrl, address, neighbourhood } = {...props.coffeeStore}
+  const { name, imgUrl, location } = {...props.coffeeStore}
+  const { address, country, cross_street, locality, region } = {...location}
 
   const title = 'Coffee Store Page'
-
+  const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
   const iconBaseString = '/static/icons/'
+
 
   const handleUpVoteBtn = () => {
     console.log('Clicked up vote!')
@@ -65,7 +73,7 @@ const CoffeeStore = (props) => {
             <Image
               priority
               className={styles.storeImg}
-              src={imgUrl}
+              src={imgUrl || defaultImgUrl}
               alt={`Image of ${name} store`}
               width={600}
               height={400}/>
@@ -74,13 +82,13 @@ const CoffeeStore = (props) => {
             <div className={styles.iconWrapper}>
               <Image src={`${iconBaseString}location-pin.svg`} width="24" height="24" alt="Location pin icon"/>
               <p className={styles.text}>
-                {address}
+                {address}, {locality}, {region}, {country}
               </p>
             </div>
             <div className={styles.iconWrapper}>
               <Image src={`${iconBaseString}near-me.svg`} width="24" height="24" alt="Star icon"/>  
               <p className={styles.text}>
-                {neighbourhood}
+                {cross_street}
               </p>
             </div>
             <div className={styles.iconWrapper}>
