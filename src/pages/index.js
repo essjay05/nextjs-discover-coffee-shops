@@ -7,7 +7,6 @@ import Layout, { baseAppTitle } from '@/components/global/Layout'
 import Banner from '@/components/global/Banner'
 import Card from '@/components/global/Card'
 
-import coffeeStoresData from '../data/coffee-stores.json'
 import { fetchCoffeeStores } from '@/lib/coffee-stores'
 
 const inter = Inter({ subsets: ['latin'] })

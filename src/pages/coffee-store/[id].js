@@ -3,13 +3,11 @@ import Link from "next/link"
 import Image from "next/image"
 
 import styles from './CoffeeStore.module.css'
-import coffeeStoreData from '../../data/coffee-stores.json'
 import { fetchCoffeeStores } from "@/lib/coffee-stores"
 
 export async function getStaticProps(staticProps) {
   const params = staticProps.params
-  console.log('getStaticProps params:')
-  console.log(params)
+ 
   const libCoffeeStores = await fetchCoffeeStores()
   return {
     props: {
