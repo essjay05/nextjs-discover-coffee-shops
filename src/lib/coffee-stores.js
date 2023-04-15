@@ -1,3 +1,9 @@
+import { createApi } from 'unsplash-js'
+
+const unsplash = createApi({
+  accessKey: 'PHOTOS_ACCESS_KEY'
+})
+
 const getUrlForCoffeeStores = (latLong, limit, query ) => {
   return `https://api.foursquare.com/v3/places/search?ll=${latLong}${ query ? `&query=${query}` : '' }&categories=13032&limit=${limit}`
 }
