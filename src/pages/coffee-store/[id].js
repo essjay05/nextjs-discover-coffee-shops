@@ -83,12 +83,16 @@ const CoffeeStore = (props) => {
                 {address}, {locality}, {region}, {country}
               </p>
             </div>
-            <div className={styles.iconWrapper}>
+            { cross_street ?
+              <div className={styles.iconWrapper}>
               <Image src={`${iconBaseString}near-me.svg`} width="24" height="24" alt="Star icon"/>  
               <p className={styles.text}>
                 {cross_street}
               </p>
             </div>
+            :
+              <></>
+            }
             <div className={styles.iconWrapper}>
               <Image src={`${iconBaseString}star.svg`} width="24" height="24" alt="Star icon"/>  
               <p className={styles.text}>
