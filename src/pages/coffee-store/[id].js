@@ -75,12 +75,19 @@ const CoffeeStore = (props) => {
               height={400}/>
           </div>
           <div className={`glass ${styles.col2}`}>
-            <div className={styles.iconWrapper}>
-              <Image src={`${iconBaseString}location-pin.svg`} width="24" height="24" alt="Location pin icon"/>
-              <p className={styles.text}>
-                {address}, {locality}, {region}, {country}
-              </p>
-            </div>
+            { address ?
+              <div className={styles.iconWrapper}>
+                <Image src={`${iconBaseString}location-pin.svg`} width="24" height="24" alt="Location pin icon"/>
+                <p className={styles.text}>
+                  {address}, 
+                  { locality ? `${locality}, ` : '' }
+                  { region ? `${region}, ` : '' }
+                  { country ? `${country}` : '' }
+                </p>
+              </div>
+            :
+              <></>
+            }
             { cross_street ?
               <div className={styles.iconWrapper}>
               <Image src={`${iconBaseString}near-me.svg`} width="24" height="24" alt="Star icon"/>  
