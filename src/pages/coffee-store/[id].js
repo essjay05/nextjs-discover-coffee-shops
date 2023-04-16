@@ -12,7 +12,7 @@ export async function getStaticProps(staticProps) {
   return {
     props: {
       coffeeStore: libCoffeeStores.find((coffeeStore) => {
-        return coffeeStore.fsq_id.toString() === params.id
+        return coffeeStore.id.toString() === params.id
       })
     }
   }
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
   const paths = coffeeStores.map((coffeeStore) => {
     return { 
       params: { 
-        id: coffeeStore.fsq_id.toString()
+        id: coffeeStore.id.toString()
       }
     }
   })
@@ -41,13 +41,11 @@ const CoffeeStore = (props) => {
     return <div>Loading...</div>
   }
 
-  const { name, imgUrl, location } = {...props.coffeeStore}
-  const { address, country, cross_street, locality, region } = {...location}
+  const { name, address, country, cross_street, locality, region, imgUrl } = {...props.coffeeStore}
 
   const title = 'Coffee Store Page'
   const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
   const iconBaseString = '/static/icons/'
-
 
   const handleUpVoteBtn = () => {
     console.log('Clicked up vote!')

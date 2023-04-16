@@ -40,7 +40,13 @@ export const fetchCoffeeStores = async () => {
   const data = await response.json()
   return data.results.map((result, index) => {
     return {
-      ...result,
+      id: result.fsq_id,
+      name: result.name,
+      address: result.location.address,
+      country: result.location.country,
+      cross_street: result.location.cross_street || null,
+      locality: result.location.locality,
+      region: result.location.region,
       imgUrl: photos[index]
     }
   })
