@@ -10,6 +10,11 @@ const Card = (props) => {
       <div className={`glass ${styles.cardContainer}`}>
         <div className={styles.cardTextWrapper}>
           <h2 className={styles.cardHeader}>{props.name}</h2>
+          <Image 
+            src='/static/icons/forward-arrow.svg'
+            width={24}
+            height={24}
+            alt='Forward arrow'/>
         </div>
         <div className={styles.cardImgWrapper}>
           <Image
