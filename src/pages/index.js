@@ -67,10 +67,10 @@ export default function Home( props ) {
               { props.coffeeStores.map(cafe => {
                 return (
                   <Card
-                    key={cafe.fsq_id}
+                    key={cafe.id}
                     className={styles.card}
                     name={cafe.name}
-                    href={`/coffee-store/${cafe.fsq_id}`}
+                    href={`/coffee-store/${cafe.id}`}
                     imgSrc={cafe.imgUrl || defaultImgUrl}
                     />
                 )
