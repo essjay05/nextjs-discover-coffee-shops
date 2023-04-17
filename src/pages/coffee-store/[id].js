@@ -56,8 +56,16 @@ const CoffeeStore = (props) => {
       <section className={styles.layout}>
         <div className={styles.container}>
           <div className={styles.col1}>
-            <div className={styles.backToHomeLink}>
-              <Link href="/" name="Back to home page">
+            <div className={styles.backToHomeLinkWrapper}>
+              <Link href="/"
+                className={styles.backToHomeLink}
+                name="Back to home page">
+                <Image
+                  src={`${iconBaseString}back-arrow.svg`} 
+                  width="24" 
+                  height="24" 
+                  alt="Back icon"
+                  className={styles.backToHomeIcon}/> 
                 Back to Home page
               </Link>
             </div>
