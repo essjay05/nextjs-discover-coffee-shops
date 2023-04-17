@@ -47,7 +47,7 @@ export const fetchCoffeeStores = async () => {
       cross_street: result.location.cross_street || null,
       locality: result.location.locality,
       region: result.location.region,
-      imgUrl: photos[index]
+      imgUrl: photos.length > 0 ?  photos[index] : null
     }
   })
 }
