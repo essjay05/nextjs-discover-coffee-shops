@@ -8,6 +8,7 @@ import Banner from '@/components/global/Banner'
 import Card from '@/components/global/Card'
 
 import { fetchCoffeeStores } from '@/lib/coffee-stores'
+import useTrackLocation from '@/hooks/use-track-location'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,12 +28,17 @@ export default function Home( props ) {
   // console.log('Home props')
   // console.log(props)
 
+  const { handleTrackLocation, latLong, locationErrMsg } = useTrackLocation()
+
+  console.log({ latLong, locationErrMsg })
+
   const titleA = 'Coffee '
   const titleB = 'Connection'
   const subtitle = 'Discover your local coffee shops!'
   const btnText = 'Find Local Shops!'
   const handleOnBannerBtnClick = () => {
     console.log('Hi Banner Button :)')
+    handleTrackLocation()
   }
 
   const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
