@@ -14,6 +14,14 @@
   display: block;
 }
 
+.bannerErrMsgContainer {
+  text-align: left;
+  width: 100%;
+  padding-left: 0.75rem;
+  color: var(--red-color);
+  font-size: 1.25rem;
+}
+
 .code {
   font-weight: 700;
   font-family: var(--font-mono);
@@ -90,6 +98,13 @@
   }
 }
 
+/* Desktop/HD */
+@media (min-width: 1536px) {
+  .bannerErrMsgContainer {
+    padding-left: 3rem;
+  }
+}
+
 /* LAPTOP */
 @media (min-width: 1280px) {
   .aboveFold {
@@ -114,6 +129,10 @@
     max-width: 100%;
     column-gap: 1.5rem;
     row-gap: 1.5rem;
+  }
+
+  .bannerErrMsgContainer {
+    padding-left: 2rem;
   }
 }
 

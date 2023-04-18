@@ -28,7 +28,7 @@ export default function Home( props ) {
   // console.log('Home props')
   // console.log(props)
 
-  const { handleTrackLocation, latLong, locationErrMsg } = useTrackLocation()
+  const { handleTrackLocation, latLong, locationErrMsg, isLoadingLocation } = useTrackLocation()
 
   console.log({ latLong, locationErrMsg })
 
@@ -54,8 +54,16 @@ export default function Home( props ) {
             titleA={titleA} 
             titleB={titleB} 
             subtitle={subtitle}
-            btnText={btnText}
+            btnText={isLoadingLocation ? "Locating..." : btnText}
             handleOnClick={handleOnBannerBtnClick}/>
+          { locationErrMsg.includes('ERROR') ?
+            <div className={styles.bannerErrMsgContainer}>
+              <strong>Something went wrong. {locationErrMsg}</strong>
+            </div>
+          :
+            <></>
+          }
+          
           <div
             className={styles.heroImage} >
             <Image 
