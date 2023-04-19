@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -27,6 +29,8 @@ export default function Home( props ) {
 
   // console.log('Home props')
   // console.log(props)
+  const [ appliedLatLong, setAppliedLatLong ] = useState('')
+  const [ coffeeStoresList, setCoffeeStoresList ] = useState([])
 
   const { handleTrackLocation, latLong, locationErrMsg, isLoadingLocation } = useTrackLocation()
 
@@ -36,6 +40,23 @@ export default function Home( props ) {
   const titleB = 'Connection'
   const subtitle = 'Discover your local coffee shops!'
   const btnText = 'Find Local Shops!'
+
+  useEffect(() => {
+    async function setCoffeeStoresByLocation() {
+      if (latLong) {
+        try {
+          const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 30)
+          console.log({ fetchedCoffeeStores })
+          setCoffeeStoresList(fetchedCoffeeStores)
+        }
+        catch(err) {
+          console.error(err)
+        }
+      }
+    }
+    setCoffeeStoresByLocation()
+  },[latLong])
+
   const handleOnBannerBtnClick = () => {
     console.log('Hi Banner Button :)')
     handleTrackLocation()
@@ -63,7 +84,6 @@ export default function Home( props ) {
           :
             <></>
           }
-          
           <div
             className={styles.heroImage} >
             <Image 
