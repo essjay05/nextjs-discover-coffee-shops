@@ -27,14 +27,15 @@ export async function getStaticProps(context) {
 
 export default function Home( props ) {
 
-  // console.log('Home props')
-  // console.log(props)
-  const [ appliedLatLong, setAppliedLatLong ] = useState('')
-  const [ coffeeStoresList, setCoffeeStoresList ] = useState([])
-
   const { handleTrackLocation, latLong, locationErrMsg, isLoadingLocation } = useTrackLocation()
 
   console.log({ latLong, locationErrMsg })
+  // console.log('Home props')
+  // console.log(props)
+  const [ appliedLatLong, setAppliedLatLong ] = useState(latLong)
+  const [ localCoffeeStoresList, setLocalCoffeeStoresList ] = useState([])
+
+  
 
   const titleA = 'Coffee '
   const titleB = 'Connection'
@@ -45,9 +46,9 @@ export default function Home( props ) {
     async function setCoffeeStoresByLocation() {
       if (latLong) {
         try {
-          const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 30)
+          const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 9)
           console.log({ fetchedCoffeeStores })
-          setCoffeeStoresList(fetchedCoffeeStores)
+          setLocalCoffeeStoresList(fetchedCoffeeStores)
         }
         catch(err) {
           console.error(err)
@@ -95,6 +96,26 @@ export default function Home( props ) {
               alt="Illustration of 3 friends having coffee together."/>
           </div>
         </section>
+        { localCoffeeStoresList.length > 0 ?
+          <section className={styles.listContainer}>
+            <h2 className={styles.listHeader}>Stores near {localCoffeeStoresList[0].locality}{ }, {localCoffeeStoresList[0].region}</h2>
+            <div className={styles.cardLayout}>
+              { localCoffeeStoresList.map(cafe => {
+                return (
+                  <Card
+                    key={cafe.id}
+                    className={styles.card}
+                    name={cafe.name}
+                    href={`/coffee-store/${cafe.id}`}
+                    imgSrc={cafe.imgUrl || defaultImgUrl}
+                    />
+                )
+              })}
+            </div>
+        </section>
+        :
+        <></>
+        }
         { props.coffeeStores.length > 0 ?
           <section className={styles.listContainer}>
             <h2 className={styles.listHeader}>San Francisco Stores</h2>
