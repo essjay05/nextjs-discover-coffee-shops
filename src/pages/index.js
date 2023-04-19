@@ -30,11 +30,9 @@ export default function Home( props ) {
   const { handleTrackLocation, latLong, locationErrMsg, isLoadingLocation } = useTrackLocation()
 
   console.log({ latLong, locationErrMsg })
-  // console.log('Home props')
-  // console.log(props)
-  const [ appliedLatLong, setAppliedLatLong ] = useState(latLong)
-  const [ localCoffeeStoresList, setLocalCoffeeStoresList ] = useState([])
 
+  const [ localCoffeeStoresList, setLocalCoffeeStoresList ] = useState([])
+  const [ coffeeStoresError, setCoffeeStoresError ] = useState(null)
   
 
   const titleA = 'Coffee '
@@ -51,7 +49,8 @@ export default function Home( props ) {
           setLocalCoffeeStoresList(fetchedCoffeeStores)
         }
         catch(err) {
-          console.error(err)
+          const errorMsg = `ERROR: ${err.message}`
+          setCoffeeStoresError(errorMsg)
         }
       }
     }
@@ -59,9 +58,7 @@ export default function Home( props ) {
   },[latLong])
 
   const handleOnBannerBtnClick = () => {
-    console.log('Hi Banner Button :)')
     handleTrackLocation()
-    setAppliedLatLong(latLong)
   }
 
   const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
@@ -86,6 +83,13 @@ export default function Home( props ) {
           :
             <></>
           }
+          { coffeeStoresError ?
+            <div className={styles.bannerErrMsgContainer}>
+              <strong>Something went wrong. {coffeeStoresError}</strong>
+            </div>
+          :
+            <></>
+          }
           <div
             className={styles.heroImage} >
             <Image 
@@ -96,7 +100,7 @@ export default function Home( props ) {
               alt="Illustration of 3 friends having coffee together."/>
           </div>
         </section>
-        { localCoffeeStoresList.length > 0 ?
+        { localCoffeeStoresList.length > 0 && !coffeeStoresError ?
           <section className={styles.listContainer}>
             <h2 className={styles.listHeader}>Stores near {localCoffeeStoresList[0].locality}{ }, {localCoffeeStoresList[0].region}</h2>
             <div className={styles.cardLayout}>
