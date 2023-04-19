@@ -98,50 +98,6 @@
   }
 }
 
-/* Desktop/HD */
-@media (min-width: 1536px) {
-  .bannerErrMsgContainer {
-    padding-left: 3rem;
-  }
-}
-
-/* LAPTOP */
-@media (min-width: 1280px) {
-  .aboveFold {
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-
-  .heroImage {
-    top: 5%;
-    right: 0;
-  }
-
-  .content {
-    padding: 4rem;
-  }
-
-  .grid,
-  .cardLayout {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: var(--max-width);
-    max-width: 100%;
-    column-gap: 1.5rem;
-    row-gap: 1.5rem;
-  }
-
-  .bannerErrMsgContainer {
-    padding-left: 2rem;
-  }
-}
-
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
-}
-
 /* phone and Smaller Desktop */
 @media (min-width: 350px) {
   .heroImage {
@@ -151,7 +107,21 @@
   }
 
   .aboveFold {
-    margin-bottom: 12rem;
+    margin-bottom: 0rem;
+  }
+
+  .bannerErrMsgContainer {
+    padding-top: 15rem;
+  }
+
+  .listContainer {
+    margin-top: 0rem;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .card:hover span {
+    transform: none;
   }
 }
 
@@ -177,6 +147,10 @@
     column-gap: 1.5rem;
     row-gap: 1.5rem;
   }
+
+  .bannerErrMsgContainer {
+    padding-top: 5rem;
+  }
 }
 
 /* LAPTOP */
@@ -192,6 +166,10 @@
     right: 0;
   }
 
+  .bannerErrMsgContainer {
+    padding-top: 1.5rem;
+  }
+
   .grid,
   .cardLayout {
     display: grid;
@@ -203,21 +181,44 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .vercelLogo {
-    filter: invert(1);
+/* LAPTOP */
+@media (min-width: 1280px) {
+  .aboveFold {
+    flex-direction: column;
+    flex-wrap: wrap;
   }
 
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  .heroImage {
+    top: 5%;
+    right: 0;
+  }
+
+  .listContainer {
+    margin-top: 3rem;
+  }
+
+  .content {
+    padding: 4rem;
+  }
+
+  .grid,
+  .cardLayout {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: var(--max-width);
+    max-width: 100%;
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+  }
+
+  .bannerErrMsgContainer {
+    padding-left: 2rem;
   }
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
+/* Desktop/HD */
+@media (min-width: 1536px) {
+  .bannerErrMsgContainer {
+    padding-left: 3rem;
   }
 }
