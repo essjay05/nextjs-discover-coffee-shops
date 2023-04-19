@@ -60,6 +60,7 @@ export default function Home( props ) {
   const handleOnBannerBtnClick = () => {
     console.log('Hi Banner Button :)')
     handleTrackLocation()
+    setAppliedLatLong(latLong)
   }
 
   const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
@@ -96,7 +97,7 @@ export default function Home( props ) {
         </section>
         { props.coffeeStores.length > 0 ?
           <section className={styles.listContainer}>
-            <h2 className={styles.listHeader}>San Jose Stores</h2>
+            <h2 className={styles.listHeader}>San Francisco Stores</h2>
             <div className={styles.cardLayout}>
               { props.coffeeStores.map(cafe => {
                 return (

@@ -19,9 +19,11 @@ const getPhotosOfCoffeeStores = async() => {
   return unsplashPhotos.map((result) => result.urls['small'])
 }
 
-const sanJoseLatLongCoords = '37.338207%2C-121.886330'
+// const sanJoseLatLongCoords = '37.338207%2C-121.886330'
+const sfLatLongCoords = '37.780079%2C-122.420174'
+// const abbottsfordLatLongCoords = '49.063040%2C-122.251350'
 
-export const fetchCoffeeStores = async (latLong = sanJoseLatLongCoords, limit = 9) => {
+export const fetchCoffeeStores = async (latLong = sfLatLongCoords, limit = 9) => {
   const photos = await getPhotosOfCoffeeStores()
 
   const fourSquareApiUrl = getUrlForCoffeeStores(
