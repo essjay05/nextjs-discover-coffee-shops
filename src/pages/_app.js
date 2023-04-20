@@ -1,9 +1,9 @@
 import { createContext, useReducer } from 'react'
 import '@/styles/globals.css'
 
-const StoreContext = createContext()
+export const StoreContext = createContext()
 
-const ACTION_TYPES = {
+export const ACTION_TYPES = {
   SET_LAT_LONG: 'SET_LAT_LONG',
   SET_COFFEE_STORES: 'SET_COFFEE_STORES'
 }
@@ -11,20 +11,26 @@ const ACTION_TYPES = {
 const storeReducer = ( state, action ) => {
   switch(action.type) {
     case ACTION_TYPES.SET_LAT_LONG: {
-
+      return {
+        ...state, 
+        latLong: action.payload.latLong
+      }
     }
     case ACTION_TYPES.SET_COFFEE_STORES: {
-
+      return {
+        ...state, 
+        coffeeStores: action.payload.coffeeStores
+      }
     }
     default:
-      throw new Error(`Unhandled actiontype: ${actionl.type}`)
+      throw new Error(`Unhandled actiontype: ${action.type}`)
   }
 }
 
 const StoreProvider = ({ children }) => {
   const initialState = {
     latLong: '',
-    coffeStores: []
+    coffeeStores: []
   }
 
   const [ state, dispatch ] = useReducer(storeReducer, initialState)

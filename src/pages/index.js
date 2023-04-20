@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
 import Layout, { baseAppTitle } from '@/components/global/Layout'
@@ -12,7 +11,7 @@ import Card from '@/components/global/Card'
 import { fetchCoffeeStores } from '@/lib/coffee-stores'
 import useTrackLocation from '@/hooks/use-track-location'
 
-const inter = Inter({ subsets: ['latin'] })
+import { StoreContext, ACTION_TYPES } from '../pages/_app'
 
 export async function getStaticProps(context) {
   
@@ -26,14 +25,16 @@ export async function getStaticProps(context) {
 }
 
 export default function Home( props ) {
+  console.log('props', props)
+  const { handleTrackLocation, locationErrMsg, isFindingLocation } = useTrackLocation()
 
-  const { handleTrackLocation, latLong, locationErrMsg, isLoadingLocation } = useTrackLocation()
-
-  console.log({ latLong, locationErrMsg })
-
-  const [ localCoffeeStoresList, setLocalCoffeeStoresList ] = useState([])
+  // const [ localCoffeeStoresList, setLocalCoffeeStoresList ] = useState([])
   const [ coffeeStoresError, setCoffeeStoresError ] = useState(null)
   
+  const { dispatch, state } = useContext(StoreContext)
+  const { coffeeStores, latLong } = state
+
+  console.log({ latLong, locationErrMsg })
 
   const titleA = 'Coffee '
   const titleB = 'Connection'
@@ -46,9 +47,14 @@ export default function Home( props ) {
         try {
           const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 9)
           console.log({ fetchedCoffeeStores })
-          setLocalCoffeeStoresList(fetchedCoffeeStores)
-        }
-        catch(err) {
+          // setLocalCoffeeStoresList(fetchedCoffeeStores)
+          dispatch({
+              type: ACTION_TYPES.SET_COFFEE_STORES,
+              payload: {
+                coffeeStores: fetchedCoffeeStores
+              }
+          })
+        } catch(err) {
           const errorMsg = `ERROR: ${err.message}`
           setCoffeeStoresError(errorMsg)
         }
@@ -74,7 +80,7 @@ export default function Home( props ) {
             titleA={titleA} 
             titleB={titleB} 
             subtitle={subtitle}
-            btnText={isLoadingLocation ? "Locating..." : btnText}
+            btnText={isFindingLocation ? "Locating..." : btnText}
             handleOnClick={handleOnBannerBtnClick}/>
           { locationErrMsg.includes('ERROR') ?
             <div className={styles.bannerErrMsgContainer}>
@@ -100,11 +106,11 @@ export default function Home( props ) {
               alt="Illustration of 3 friends having coffee together."/>
           </div>
         </section>
-        { localCoffeeStoresList.length > 0 && !coffeeStoresError ?
+        { coffeeStores.length > 0 && !coffeeStoresError ?
           <section className={styles.listContainer}>
-            <h2 className={styles.listHeader}>Stores near {localCoffeeStoresList[0].locality}{ }, {localCoffeeStoresList[0].region}</h2>
+            <h2 className={styles.listHeader}>Stores near {coffeeStores[0].locality}{ }, {coffeeStores[0].region}</h2>
             <div className={styles.cardLayout}>
-              { localCoffeeStoresList.map(cafe => {
+              { coffeeStores.map(cafe => {
                 return (
                   <Card
                     key={cafe.id}

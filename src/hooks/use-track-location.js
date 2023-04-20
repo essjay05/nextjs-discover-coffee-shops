@@ -1,40 +1,48 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { ACTION_TYPES, StoreContext } from '../pages/_app'
 
 const useTrackLocation = () => {
   const [locationErrMsg, setLocationErrMsg] = useState("")
-  const [latLong, setLatLong] = useState("")
-  const [isLoadingLocation, setIsLoadingLocation] = useState(false)
+  // const [latLong, setLatLong] = useState("")
+  const [isFindingLocation, setIsFindingLocation] = useState(false)
+
+  const { dispatch } = useContext(StoreContext)
 
   const success = (position) => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    setLatLong(`${latitude},${longitude}`)
+    // setLatLong(`${latitude},${longitude}`)
+    dispatch({
+      type: ACTION_TYPES.SET_LAT_LONG,
+      payload: { latLong: `${latitude},${longitude}` }
+    })
     setLocationErrMsg("")
-    setIsLoadingLocation(false)
+    setIsFindingLocation(false)
   }
 
   const error = () => {
-    setIsLoadingLocation(false)
+    setIsFindingLocation(false)
     setLocationErrMsg("ERROR: Unable to retrieve your location.")
   }
 
   const handleTrackLocation = () => {
-    setIsLoadingLocation(true)
+    setIsFindingLocation(true)
+
     if (!navigator.geolocation) {
       setLocationErrMsg("ERROR: Geolocation is not supported by your browser")
-      setIsLoadingLocation(false)
+      setIsFindingLocation(false)
     } else {
-      setLocationErrMsg("Locating…")
+      // setLocationErrMsg("Locating…")
       navigator.geolocation.getCurrentPosition(success, error);
     }
   }
 
   return {
-    latLong,
+    // latLong,
     handleTrackLocation,
     locationErrMsg,
-    isLoadingLocation
+    isFindingLocation
   }
 }
 
