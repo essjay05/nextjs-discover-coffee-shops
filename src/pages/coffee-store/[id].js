@@ -9,11 +9,12 @@ export async function getStaticProps(staticProps) {
   const params = staticProps.params
  
   const libCoffeeStores = await fetchCoffeeStores()
+  const findCoffeeStoreById = libCoffeeStores.find((coffeeStore) => {
+    return coffeeStore.id.toString() === params.id
+  })
   return {
     props: {
-      coffeeStore: libCoffeeStores.find((coffeeStore) => {
-        return coffeeStore.id.toString() === params.id
-      })
+      coffeeStore: findCoffeeStoreById ? findCoffeeStoreById : {},
     }
   }
 }
