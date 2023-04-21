@@ -1,9 +1,13 @@
+import { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import Image from "next/image"
 
 import styles from './CoffeeStore.module.css'
 import { fetchCoffeeStores } from "@/lib/coffee-stores"
+
+import { StoreContext } from '@/pages/_app'
+import { isEmpty } from "@/utils"
 
 export async function getStaticProps(staticProps) {
   const params = staticProps.params
@@ -34,7 +38,7 @@ export async function getStaticPaths() {
   }
 }
 
-const CoffeeStore = (props) => {
+const CoffeeStore = (initialProps) => {
   const router = useRouter()
   const { id } = router.query
 
@@ -42,7 +46,24 @@ const CoffeeStore = (props) => {
     return <div>Loading...</div>
   }
 
-  const { name, address, country, cross_street, locality, region, imgUrl } = {...props.coffeeStore}
+  const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore)
+
+
+  const {
+    state: {coffeeStores}
+  } = useContext(StoreContext)
+
+  useEffect(() => {
+    if (isEmpty(initialProps.coffeeStore)) {
+      if (coffeeStores.length > 0) {
+        const findCoffeeStoreById = coffeeStores.find((cs) => {
+          return cs.id.toString() === id
+        })
+        setCoffeeStore(findCoffeeStoreById)
+      }
+    }
+  }, [id])
+  const { name, address, country, cross_street, locality, region, imgUrl } = coffeeStore
 
   const title = 'Coffee Store Page'
   const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
