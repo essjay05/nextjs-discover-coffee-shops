@@ -11,7 +11,7 @@ import Card from '@/components/global/Card'
 import { fetchCoffeeStores } from '@/lib/coffee-stores'
 import useTrackLocation from '@/hooks/use-track-location'
 
-import { StoreContext, ACTION_TYPES } from '../pages/_app'
+import { StoreContext, ACTION_TYPES } from '../store/store-context'
 
 export async function getStaticProps(context) {
   
@@ -25,7 +25,7 @@ export async function getStaticProps(context) {
 }
 
 export default function Home( props ) {
-  console.log('props', props)
+  // console.log('props', props)
   const { handleTrackLocation, locationErrMsg, isFindingLocation } = useTrackLocation()
 
   // const [ localCoffeeStoresList, setLocalCoffeeStoresList ] = useState([])

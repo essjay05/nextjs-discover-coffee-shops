@@ -41,8 +41,8 @@ export const fetchCoffeeStores = async (latLong = sfLatLongCoords, limit = 9) =>
 
   const response = await fetch(fourSquareApiUrl, options)
   const data = await response.json()
-  console.log('lib/coffee-stores data after calling fourSquareApiUrl:')
-  console.log(data)
+  // console.log('lib/coffee-stores data after calling fourSquareApiUrl:')
+  // console.log(data)
   return data.results.map((result, index) => {
     return {
       id: result.fsq_id,

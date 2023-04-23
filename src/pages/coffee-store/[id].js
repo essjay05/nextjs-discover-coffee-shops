@@ -6,12 +6,16 @@ import Image from "next/image"
 import styles from './CoffeeStore.module.css'
 import { fetchCoffeeStores } from "@/lib/coffee-stores"
 
-import { StoreContext } from '@/pages/_app'
+import { StoreContext } from '../../store/store-context'
 import { isEmpty } from "@/utils"
 
 export async function getStaticProps(staticProps) {
   const params = staticProps.params
  
+  console.log('getStaticProps [id]')
+  console.log(staticProps)
+
+
   const libCoffeeStores = await fetchCoffeeStores()
   const findCoffeeStoreById = libCoffeeStores.find((coffeeStore) => {
     return coffeeStore.id.toString() === params.id
@@ -42,6 +46,9 @@ const CoffeeStore = (initialProps) => {
   const router = useRouter()
   const { id } = router.query
 
+  console.log('CoffeeStore router:')
+  console.log(router.query.id)
+
   if (router.isFallback){
     return <div>Loading...</div>
   }
@@ -63,6 +70,7 @@ const CoffeeStore = (initialProps) => {
       }
     }
   }, [id])
+
   const { name, address, country, cross_street, locality, region, imgUrl } = coffeeStore
 
   const title = 'Coffee Store Page'
