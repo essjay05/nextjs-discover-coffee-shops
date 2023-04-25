@@ -12,12 +12,18 @@ const createCoffeeStore = async(req, res) => {
   
   if (req.method === 'POST') {
     // find a record
-    const findCoffeeStoreRecord = await table.select({
+    const findCoffeeStoreRecords = await table.select({
       filterByFormula: `id="0"`
     }).firstPage()
 
-    if (findCoffeeStoreRecord.length !== 0) {
-      res.json(findCoffeeStoreRecord)
+    if (findCoffeeStoreRecords.length !== 0) {
+      const csFields = findCoffeeStoreRecords.map(record => {
+        return {
+          ...record.fields
+
+        }
+      })
+      res.json(csFields)
     } else {
       // create record
       res.json({ message: 'Record not found so CREATE a record'})
