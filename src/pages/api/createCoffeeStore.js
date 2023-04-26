@@ -5,37 +5,49 @@ const base = new Airtable({
 
 const table = base('coffee-stores')
 
-console.log({table})
+// console.log({table})
 
 const createCoffeeStore = async(req, res) => {
-  console.log({req})
+  // console.log({req})
   
   if (req.method === 'POST') {
     // find a record
+    const { id, name, address, neighbourhood, voting, imgUrl } = req.body
+    console.log('req.body:')
+    console.log(req.body)
+    console.log(`
+      req.body values:
+      id: ${id},
+      name: ${name},
+      address: ${address},
+      neighbourhood: ${neighbourhood},
+      voting: ${voting},
+      imgUrl: ${imgUrl}
+    `)
     try {
       const findCoffeeStoreRecords = await table.select({
-        filterByFormula: `id="2"`
+        filterByFormula: `id=${id}`
       }).firstPage()
   
       if (findCoffeeStoreRecords.length !== 0) {
         const csFields = findCoffeeStoreRecords.map(record => {
           return {
             ...record.fields
-  
           }
         })
         res.json(csFields)
       } else {
         // create record
+        // res.json({ message: 'Record not found so CREATE a record'})
         const newRecord = await table.create([
           {
-            'fields': {
-              'id': '2',
-              'name': 'Test Coffee',
-              'address': '2332 42nd Ave, San Francisco, CA 94121',
-              'neighbourhood': 'Outer Richmond SF',
-              'voting': 200,
-              'img-url': 'https://unsplash-img.com/test-coffee'
+            fields: {
+              id,
+              name,
+              address,
+              neighbourhood,
+              voting,
+              imgUrl
             }
           }
         ])
