@@ -1,20 +1,10 @@
-const Airtable = require('airtable');
-const base = new Airtable({
-  apiKey: process.env.AIRTABLE_KEY
-}).base(process.env.AIRTABLE_BASE);
-
-const table = base('coffee-stores')
-
-// console.log({table})
+import { table, getMinifiedRecords } from "@/lib/airtable"
 
 const createCoffeeStore = async(req, res) => {
-  // console.log({req})
   
   if (req.method === 'POST') {
     // find a record
     const { id, name, address, neighbourhood, voting, imgUrl } = req.body
-    // console.log('req.body:')
-    // console.log(req.body)
     
     try {
       if (id) {
@@ -23,12 +13,8 @@ const createCoffeeStore = async(req, res) => {
         }).firstPage()
     
         if (findCoffeeStoreRecords.length !== 0) {
-          const csFields = findCoffeeStoreRecords.map(record => {
-            return {
-              ...record.fields
-            }
-          })
-          res.json(csFields)
+          const record = getMinifiedRecords(findCoffeeStoreRecords)
+          res.json(record)
         } else {
           if (name) {
             // create record
@@ -45,8 +31,9 @@ const createCoffeeStore = async(req, res) => {
                 }
               }
             ])
+            const records = getMinifiedRecords(newRecord)
             res.status(200)
-            res.json({ message: 'Created a record', records: newRecord })
+            res.json(records)
           } else {
             res.status(400)
             res.json({ message: 'Error: Name is missing' })
