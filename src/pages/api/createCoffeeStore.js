@@ -13,50 +13,53 @@ const createCoffeeStore = async(req, res) => {
   if (req.method === 'POST') {
     // find a record
     const { id, name, address, neighbourhood, voting, imgUrl } = req.body
-    console.log('req.body:')
-    console.log(req.body)
-    console.log(`
-      req.body values:
-      id: ${id},
-      name: ${name},
-      address: ${address},
-      neighbourhood: ${neighbourhood},
-      voting: ${voting},
-      imgUrl: ${imgUrl}
-    `)
+    // console.log('req.body:')
+    // console.log(req.body)
+    
     try {
-      const findCoffeeStoreRecords = await table.select({
-        filterByFormula: `id=${id}`
-      }).firstPage()
-  
-      if (findCoffeeStoreRecords.length !== 0) {
-        const csFields = findCoffeeStoreRecords.map(record => {
-          return {
-            ...record.fields
-          }
-        })
-        res.json(csFields)
-      } else {
-        // create record
-        // res.json({ message: 'Record not found so CREATE a record'})
-        const newRecord = await table.create([
-          {
-            fields: {
-              id,
-              name,
-              address,
-              neighbourhood,
-              voting,
-              imgUrl
+      if (id) {
+        const findCoffeeStoreRecords = await table.select({
+          filterByFormula: `id=${id}`
+        }).firstPage()
+    
+        if (findCoffeeStoreRecords.length !== 0) {
+          const csFields = findCoffeeStoreRecords.map(record => {
+            return {
+              ...record.fields
             }
+          })
+          res.json(csFields)
+        } else {
+          if (name) {
+            // create record
+            // res.json({ message: 'Record not found so CREATE a record'})
+            const newRecord = await table.create([
+              {
+                fields: {
+                  id,
+                  name,
+                  address,
+                  neighbourhood,
+                  voting,
+                  imgUrl
+                }
+              }
+            ])
+            res.status(200)
+            res.json({ message: 'Created a record', records: newRecord })
+          } else {
+            res.status(400)
+            res.json({ message: 'Error: Name is missing' })
           }
-        ])
-        res.json({ message: 'Created a record', records: newRecord })
+        }
+      } else {
+        res.status(400)
+        res.json({ message: 'Error: Id is missing' })
       }
     } catch(err) {
-      console.error('Error finding the store', err)
+      console.error('Error in creating or finding the store', err)
       res.status(500)
-      res.json({ message: 'Error in finding a record.', err})
+      res.json({ message: 'Error in creating or finding a record.', err})
     }
     
   } else {
