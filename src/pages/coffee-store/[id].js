@@ -76,7 +76,7 @@ const CoffeeStore = (initialProps) => {
         body: JSON.stringify({ 
           id, 
           name, 
-          voting, 
+          voting: 0, 
           imgUrl: imgUrl || '', 
           neighbourhood: cross_street || '', 
           address: fullAddress || ''
