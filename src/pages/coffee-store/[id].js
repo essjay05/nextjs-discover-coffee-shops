@@ -150,10 +150,7 @@ const CoffeeStore = (initialProps) => {
               <div className={styles.iconWrapper}>
                 <Image src={`${iconBaseString}location-pin.svg`} width="24" height="24" alt="Location pin icon"/>
                 <p className={styles.text}>
-                  {address},&nbsp;
-                  { locality ? `${locality}, ` : '' }
-                  { region ? `${region}, ` : '' }
-                  { country ? `${country}` : '' }
+                  { getFullAddress(coffeeStore) }
                 </p>
               </div>
             :
