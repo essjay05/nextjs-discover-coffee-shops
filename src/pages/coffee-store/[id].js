@@ -3,11 +3,13 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 import Image from "next/image"
 
-import styles from './CoffeeStore.module.css'
+import useSWR from "swr"
+
+import styles from "./CoffeeStore.module.css"
 import { fetchCoffeeStores } from "@/lib/coffee-stores"
 
-import { StoreContext } from '../../store/store-context'
-import { isEmpty } from "@/utils"
+import { StoreContext } from "../../store/store-context"
+import { isEmpty, fetcher } from "@/utils"
 
 export async function getStaticProps(staticProps) {
   const params = staticProps.params
@@ -109,6 +111,16 @@ const CoffeeStore = (initialProps) => {
 
   const { name, address, country, cross_street, locality, region, imgUrl } = coffeeStore
 
+  const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher)
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      console.log('data from SWR', data)
+      setCoffeeStore(data[0])
+      setVotingCount(data[0].voting)
+    }
+  }, [data])
+
   const title = 'Coffee Store Page'
   const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
   const iconBaseString = '/static/icons/'
@@ -117,6 +129,10 @@ const CoffeeStore = (initialProps) => {
     console.log('Clicked up vote!')
     let count = votingCount + 1
     setVotingCount(count)
+  }
+
+  if (error) {
+    return <div>Something went wrong retrieving coffee store page.</div>
   }
 
   return (
