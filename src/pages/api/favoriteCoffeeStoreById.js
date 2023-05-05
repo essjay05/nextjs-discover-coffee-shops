@@ -4,7 +4,6 @@ const favoriteCoffeeStoreById = async (req, res) => {
   
   if (req.method === 'PUT') {
     try {
-      // find a record
       const { id } = req.body
     
       if (id) {
@@ -13,8 +12,7 @@ const favoriteCoffeeStoreById = async (req, res) => {
         if (records.length !== 0) {
           const record = records[0]
           const calculateVoting = parseInt(record.voting) + 1
-          console.log({ calculateVoting, id: record.id })
-          // update a record with upvote
+          
           const updateRecord = await table.update([
             {
               "id": record.recordId,
