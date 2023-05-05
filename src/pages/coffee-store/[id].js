@@ -125,10 +125,24 @@ const CoffeeStore = (initialProps) => {
   const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
   const iconBaseString = '/static/icons/'
 
-  const handleUpVoteBtn = () => {
+  const handleUpVoteBtn = async () => {
     console.log('Clicked up vote!')
-    let count = votingCount + 1
-    setVotingCount(count)
+    try {
+      const response = await fetch(`/api/favoriteCoffeeStoreById/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id })
+      })
+      const dbCoffeeStore = response.json()
+      console.log({ dbCoffeeStore })
+      let count = votingCount + 1
+      setVotingCount(count)
+    } catch(err) {
+      console.error(`Error favoriting coffee store: `, err)
+    }
+    
   }
 
   if (error) {
