@@ -14,9 +14,8 @@ import { isEmpty, fetcher } from "@/utils"
 export async function getStaticProps(staticProps) {
   const params = staticProps.params
  
-  console.log('getStaticProps [id]')
-  console.log(staticProps)
-
+  // console.log('getStaticProps [id]')
+  // console.log(staticProps)
 
   const libCoffeeStores = await fetchCoffeeStores()
   const findCoffeeStoreById = libCoffeeStores.find((coffeeStore) => {
@@ -48,8 +47,8 @@ const CoffeeStore = (initialProps) => {
   const router = useRouter()
   const { id } = router.query
 
-  console.log('CoffeeStore router:')
-  console.log(router.query.id)
+  // console.log('CoffeeStore router:')
+  // console.log(router.query.id)
 
   if (router.isFallback){
     return <div>Loading...</div>
@@ -115,7 +114,7 @@ const CoffeeStore = (initialProps) => {
 
   useEffect(() => {
     if (data && data.length > 0) {
-      console.log('data from SWR', data)
+      // console.log('data from SWR', data)
       setCoffeeStore(data[0])
       setVotingCount(data[0].voting)
     }
@@ -126,7 +125,6 @@ const CoffeeStore = (initialProps) => {
   const iconBaseString = '/static/icons/'
 
   const handleUpVoteBtn = async () => {
-    console.log('Clicked up vote!')
     try {
       const response = await fetch(`/api/favoriteCoffeeStoreById/`, {
         method: 'PUT',
@@ -136,9 +134,12 @@ const CoffeeStore = (initialProps) => {
         body: JSON.stringify({ id })
       })
       const dbCoffeeStore = response.json()
-      console.log({ dbCoffeeStore })
-      let count = votingCount + 1
-      setVotingCount(count)
+
+      if (dbCoffeeStore && dbCoffeeStore.length > 0) {
+        let count = votingCount + 1
+        setVotingCount(count)
+      }
+      
     } catch(err) {
       console.error(`Error favoriting coffee store: `, err)
     }
