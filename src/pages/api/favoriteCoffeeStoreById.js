@@ -11,6 +11,27 @@ const favoriteCoffeeStoreById = async (req, res) => {
         const records = await findRecordByFilter(id)
 
         if (records.length !== 0) {
+          const record = records[0]
+          const calculateVoting = parseInt(record.voting) + 1
+          console.log({ calculateVoting, id: record.id })
+          // update a record with upvote
+          const updateRecord = await table.update([
+            {
+              "id": record.recordId,
+              "fields": {
+                voting: calculateVoting
+              }
+            }
+          ])
+
+          if (updateRecord) {
+            const minifiedRecords = getMinifiedRecords(updateRecord)
+            res.status(200)
+            res.json(minifiedRecords)
+          } else {
+            res.status(500)
+            res.json({ message: 'Error in favoriting coffee store.'})
+          }
           res.json(records)
         } else {
           res.status(400)

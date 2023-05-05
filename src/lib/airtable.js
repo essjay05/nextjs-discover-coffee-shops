@@ -6,7 +6,9 @@ const base = new Airtable({
 const table = base('coffee-stores')
 
 const getMinifiedRecord = record => {
+  console.log({record})
   return {
+    recordId: record.id,
     ...record.fields
   }
 }
