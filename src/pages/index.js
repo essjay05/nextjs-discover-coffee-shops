@@ -33,8 +33,6 @@ export default function Home( props ) {
   const { dispatch, state } = useContext(StoreContext)
   const { coffeeStores, latLong } = state
 
-  console.log({ latLong, locationErrMsg })
-
   const titleA = 'Coffee '
   const titleB = 'Connection'
   const subtitle = 'Discover your local coffee shops!'
@@ -45,7 +43,6 @@ export default function Home( props ) {
       if (latLong) {
         try {
           const fetchedCoffeeStores = await fetch(`/api/getCoffeeStoresByLocation?latLong=${latLong}&limit=24`)
-          console.log({ fetchedCoffeeStores })
           const coffeeStores = await fetchedCoffeeStores.json()
           // setLocalCoffeeStoresList(fetchedCoffeeStores)
           dispatch({
