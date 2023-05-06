@@ -44,7 +44,7 @@ export default function Home( props ) {
     async function setCoffeeStoresByLocation() {
       if (latLong) {
         try {
-          const fetchedCoffeeStores = await fetch(`/api/getCoffeeStoresByLocation?latLong=${latLong}&limit=30`)
+          const fetchedCoffeeStores = await fetch(`/api/getCoffeeStoresByLocation?latLong=${latLong}&limit=24`)
           console.log({ fetchedCoffeeStores })
           const coffeeStores = await fetchedCoffeeStores.json()
           // setLocalCoffeeStoresList(fetchedCoffeeStores)

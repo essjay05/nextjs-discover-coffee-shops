@@ -92,22 +92,17 @@
   }
 }
 
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
-}
-
 /* phone and Smaller Desktop */
 @media (min-width: 350px) {
   .heroImage {
     scale: 0.5;
-    top: 45%;
+    top: 42%;
     right: -35%;
   }
 
   .aboveFold {
     margin-bottom: 0rem;
+    padding-top: 1rem;
   }
 
   .bannerErrMsgContainer {
@@ -115,7 +110,7 @@
   }
 
   .listContainer {
-    margin-top: 0rem;
+    margin-top: 18rem;
   }
 }
 
@@ -220,5 +215,10 @@
 @media (min-width: 1536px) {
   .bannerErrMsgContainer {
     padding-left: 3rem;
+  }
+
+  .grid,
+  .cardLayout {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

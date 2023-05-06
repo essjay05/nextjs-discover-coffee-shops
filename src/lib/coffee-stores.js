@@ -23,7 +23,7 @@ const getPhotosOfCoffeeStores = async() => {
 const sfLatLongCoords = '37.780079%2C-122.420174'
 // const abbottsfordLatLongCoords = '49.063040%2C-122.251350'
 
-export const fetchCoffeeStores = async (latLong = sfLatLongCoords, limit = 9) => {
+export const fetchCoffeeStores = async (latLong = sfLatLongCoords, limit = 12) => {
   const photos = await getPhotosOfCoffeeStores()
 
   const fourSquareApiUrl = getUrlForCoffeeStores(
