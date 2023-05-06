@@ -15,7 +15,6 @@ const createCoffeeStore = async(req, res) => {
         } else {
           if (name) {
             // create record
-            // res.json({ message: 'Record not found so CREATE a record'})
             const newRecord = await table.create([
               {
                 fields: {
@@ -48,7 +47,6 @@ const createCoffeeStore = async(req, res) => {
     
   } else {
     res.json({ message: 'This is a get request'})
-    
   }
 }
 
