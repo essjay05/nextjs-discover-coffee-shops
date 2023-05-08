@@ -30,12 +30,10 @@ const favoriteCoffeeStoreById = async (req, res) => {
             res.status(500)
             res.json({ message: 'Error in favoriting coffee store.'})
           }
-          res.json(records)
         } else {
           res.status(400)
           res.json({ message: `Coffee store id: ${id} doesn't exist.`})
         }
-        res.json({ message: 'this is working', id })
       } else {
         res.status(500)
         res.json({ message: "Error: id is missing"})
