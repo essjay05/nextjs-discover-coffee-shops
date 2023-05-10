@@ -15,5 +15,9 @@
     "react-dom": "18.2.0",
     "swr": "^2.1.5",
     "unsplash-js": "^7.0.15"
+  },
+  "devDependencies": {
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.1"
   }
 }
