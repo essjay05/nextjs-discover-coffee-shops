@@ -44,11 +44,7 @@ const CoffeeStore = (initialProps) => {
   const router = useRouter()
   const { id } = router.query
 
-  if (router.isFallback){
-    return <div>Loading...</div>
-  }
-
-  const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore)
+  const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore || {})
   const [votingCount, setVotingCount] = useState(0)
 
   const {
@@ -78,7 +74,7 @@ const CoffeeStore = (initialProps) => {
           address: fullAddress || ''
         })
       })
-      response.json()
+      const dbCoffeeStore = await response.json()
     } catch(err) {
       console.error('Error creating coffee store: ', err)
     }
@@ -99,9 +95,16 @@ const CoffeeStore = (initialProps) => {
     } else {
       handleCreateCoffeeStore(initialProps.coffeeStore)
     }
-  }, [id, initialProps, initialProps.coffeeStore])
+  }, [id, initialProps, initialProps.coffeeStore, coffeeStores])
 
-  const { name, address, country, cross_street, locality, region, imgUrl } = coffeeStore
+  const { 
+    name = '', 
+    address = '',
+    country = '',
+    cross_street = '',
+    locality = '',
+    region = '',
+    imgUrl = ''} = coffeeStore
 
   const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher)
 
@@ -115,6 +118,10 @@ const CoffeeStore = (initialProps) => {
   const defaultImgUrl = "https://images.unsplash.com/photo-1504753793650-d4a2b783c15e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
   const iconBaseString = '/static/icons/'
 
+  if (router.isFallback){
+    return <div>Loading...</div>
+  }
+
   const handleUpVoteBtn = async () => {
     try {
       const response = await fetch(`/api/favoriteCoffeeStoreById/`, {
@@ -124,7 +131,7 @@ const CoffeeStore = (initialProps) => {
         },
         body: JSON.stringify({ id })
       })
-      const dbCoffeeStore = response.json()
+      const dbCoffeeStore = await response.json()
 
       if (dbCoffeeStore && dbCoffeeStore.length > 0) {
         let count = votingCount + 1
