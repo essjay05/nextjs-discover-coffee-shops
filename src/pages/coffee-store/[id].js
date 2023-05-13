@@ -56,31 +56,31 @@ const CoffeeStore = (initialProps) => {
     return address ? `${address}${ locality ? `, ${locality}` : ''}${ region ? `, ${region}` : ''}${country ? `, ${country}` : ''}` : ''
   }
 
-  const handleCreateCoffeeStore = async(coffeeStore) => {
-    try {
-      const { id, name, voting, imgUrl, cross_street } = coffeeStore
-      const fullAddress = getFullAddress(coffeeStore)
-      const response = await fetch(`/api/createCoffeeStore/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          id, 
-          name, 
-          voting: 0, 
-          imgUrl: imgUrl || '', 
-          neighbourhood: cross_street || '', 
-          address: fullAddress || ''
-        })
-      })
-      const dbCoffeeStore = await response.json()
-    } catch(err) {
-      console.error('Error creating coffee store: ', err)
-    }
-  }
-
   useEffect(() => {
+    const handleCreateCoffeeStore = async(coffeeStore) => {
+      try {
+        const { id, name, voting, imgUrl, cross_street } = coffeeStore
+        const fullAddress = getFullAddress(coffeeStore)
+        const response = await fetch(`/api/createCoffeeStore/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            id, 
+            name, 
+            voting: 0, 
+            imgUrl: imgUrl || '', 
+            neighbourhood: cross_street || '', 
+            address: fullAddress || ''
+          })
+        })
+        const dbCoffeeStore = await response.json()
+      } catch(err) {
+        console.error('Error creating coffee store: ', err)
+      }
+    }
+
     if (isEmpty(initialProps.coffeeStore)) {
       if (coffeeStores.length > 0) {
         const coffeeStoreFromContext = coffeeStores.find((cs) => {
