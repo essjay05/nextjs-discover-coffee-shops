@@ -3,7 +3,8 @@ import styles from "./Footer.module.css"
 
 const Footer = () => {
   return (
-    <footer>
+    <footer
+      className={styles.footer}>
       <Link 
         target={`_blank`} 
         href={`https://www.joyserquina.com`}

@@ -1,0 +1,6 @@
+.footer {
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+  background: hsla(0, 0%, 100%, 0.4);
+  text-align: right;
+}
