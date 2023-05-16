@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import Image from "next/image"
+import Layout from "@/components/global/Layout"
 
 import useSWR from "swr"
 
@@ -150,71 +151,72 @@ const CoffeeStore = (initialProps) => {
 
   return (
     <>
-      <section className={styles.layout}>
-        <div className={styles.container}>
-          <div className={styles.containerHeader}>
-            <div className={styles.backToHomeLinkWrapper}>
-              <Link href="/"
-                className={styles.backToHomeLink}
-                name="Back to home page">
+      <Layout>
+        <section className={styles.layout}>
+          <div className={styles.container}>
+            <div className={styles.containerHeader}>
+              <div className={styles.backToHomeLinkWrapper}>
+                <Link href="/"
+                  className={styles.backToHomeLink}
+                  name="Back to home page">
+                  <Image
+                    src={`${iconBaseString}back-arrow.svg`} 
+                    width="24" 
+                    height="24" 
+                    alt="Back icon"
+                    className={styles.backToHomeIcon}/> 
+                  Back to Home page
+                </Link>
+              </div>
+              <div className={styles.nameWrapper}>
+                <h1 className={styles.storeTitle}>
+                  {name}
+                </h1>
+              </div>
+            </div>
+            <div className={styles.colContainer}>
+              <div className={styles.col1}>
                 <Image
-                  src={`${iconBaseString}back-arrow.svg`} 
-                  width="24" 
-                  height="24" 
-                  alt="Back icon"
-                  className={styles.backToHomeIcon}/> 
-                Back to Home page
-              </Link>
-            </div>
-            <div className={styles.nameWrapper}>
-              <h1 className={styles.storeTitle}>
-                {name}
-              </h1>
-            </div>
-          </div>
-          <div className={styles.colContainer}>
-            <div className={styles.col1}>
-              <Image
-                priority
-                className={styles.storeImg}
-                src={imgUrl || defaultImgUrl}
-                alt={`Image of ${name} store`}
-                width={600}
-                height={400}/>
-            </div>
-            <div className={`glass ${styles.col2}`}>
-              { address ?
-                <div className={styles.iconWrapper}>
-                  <Image src={`${iconBaseString}location-pin.svg`} width="24" height="24" alt="Location pin icon"/>
+                  priority
+                  className={styles.storeImg}
+                  src={imgUrl || defaultImgUrl}
+                  alt={`Image of ${name} store`}
+                  width={600}
+                  height={400}/>
+              </div>
+              <div className={`glass ${styles.col2}`}>
+                { address ?
+                  <div className={styles.iconWrapper}>
+                    <Image src={`${iconBaseString}location-pin.svg`} width="24" height="24" alt="Location pin icon"/>
+                    <p className={styles.text}>
+                      { getFullAddress(coffeeStore) }
+                    </p>
+                  </div>
+                :
+                  <></>
+                }
+                { cross_street ?
+                  <div className={styles.iconWrapper}>
+                  <Image src={`${iconBaseString}near-me.svg`} width="24" height="24" alt="Star icon"/>  
                   <p className={styles.text}>
-                    { getFullAddress(coffeeStore) }
+                    {cross_street}
                   </p>
                 </div>
-              :
-                <></>
-              }
-              { cross_street ?
+                :
+                  <></>
+                }
                 <div className={styles.iconWrapper}>
-                <Image src={`${iconBaseString}near-me.svg`} width="24" height="24" alt="Star icon"/>  
-                <p className={styles.text}>
-                  {cross_street}
-                </p>
+                  <Image src={`${iconBaseString}star.svg`} width="24" height="24" alt="Star icon"/>  
+                  <p className={styles.text}>
+                    Rating: {votingCount}
+                  </p>
+                </div>
+                <button className={styles.upvoteBtn} onClick={handleUpVoteBtn}>Up Vote!</button>
               </div>
-              :
-                <></>
-              }
-              <div className={styles.iconWrapper}>
-                <Image src={`${iconBaseString}star.svg`} width="24" height="24" alt="Star icon"/>  
-                <p className={styles.text}>
-                  Rating: {votingCount}
-                </p>
-              </div>
-              <button className={styles.upvoteBtn} onClick={handleUpVoteBtn}>Up Vote!</button>
             </div>
           </div>
-        </div>
-      </section>
-      
+        </section>
+      </Layout>
     </>
   )
 }
