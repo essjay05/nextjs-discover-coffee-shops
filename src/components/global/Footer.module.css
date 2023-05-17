@@ -3,4 +3,5 @@
   backdrop-filter: blur(10px);
   background: hsla(0, 0%, 100%, 0.4);
   text-align: center;
+  font-weight: 600;
 }
