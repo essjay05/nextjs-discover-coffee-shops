@@ -12,7 +12,7 @@ const getPhotosOfCoffeeStores = async() => {
   const photos = await unsplash.search.getPhotos({
     query: 'coffee shop',
     page: 1,
-    perPage: 40
+    perPage: 48
   })
 
   const unsplashPhotos = photos.response.results
