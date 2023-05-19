@@ -5,3 +5,7 @@
   text-align: center;
   font-weight: 600;
 }
+
+.copyright {
+  color: var(--text-blue);
+}
